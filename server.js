@@ -1,5 +1,6 @@
 const express = require('express');
 const app  = express();
+const logger = require('./config/logger')
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./app/swagger/swagger.json')
@@ -24,5 +25,5 @@ require('./app/routes/routes.js')(app);
 
 //listen for request
 app.listen(process.env.PORT,()=>{
-    console.log(`Server is listening at 3000`);
+    logger.log("info","Server is listening at port ${process.env.PORT}");
 })
