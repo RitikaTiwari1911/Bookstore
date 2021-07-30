@@ -22,6 +22,22 @@ class userService{
             return callback(error,null);
         }
     }
+
+    /**
+     * @description callback for login
+     * @param {*} loginInput 
+     * @param {*} callback 
+     * @returns 
+     */
+     login = (loginInput, callback)=>{
+        try{
+            userModel.login(loginInput,(error, data)=>{
+                return error? callback(error, null): callback(null, data)
+            })
+        }catch(error){
+            return callback(error,null);
+        }
+    }
 }
 
 module.exports = new userService();

@@ -9,4 +9,7 @@ const userController = require('../controllers/user.js')
 module.exports = (app) =>{
     //Registering a new user
     app.post('/registerUser', userController.registerUser)
+
+    //User login
+    app.post('/userLogin', userController.userLogin)
 }

@@ -69,6 +69,26 @@ class userModel{
             return callback(error,null);
         }
     }
+
+    /**@description user login 
+     * @param {*} loginInput 
+     * @param {*} callback 
+     * @returns 
+     */
+     login = (loginInput, callback) =>{
+        try{
+            registerUser.findOne({'emailId':loginInput.emailId},(error,data)=>{
+                if(error){
+                    return callback(error,null);
+                }else if (!data){
+                    return callback("Invalid credentails",null)
+                }
+                return callback(null, data);
+            })
+        }catch(error){
+            return callback(error, null);
+        }
+    }
 }
 
 module.exports = new userModel();
