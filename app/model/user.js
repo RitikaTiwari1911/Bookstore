@@ -8,7 +8,7 @@
 //connecting to the mongoDB through mongoose
 const mongoose = require('mongoose');
 
-//schema for addressbook
+//schema for user of the bookstore
 const userSchema = mongoose.Schema({
     firstName:{
         type: String,
@@ -28,10 +28,38 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         validate: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
-    },{
+    },
+ }, {
         //Applying time stamp
         timestamps: true
     });
 
     //exporting model module
     module.exports = mongoose.model("bookstore", userSchema)
+
+    const registerUser = mongoose.model('registerUser',userSchema)
+
+class userModel{
+    /**
+     * @description registering address in the database
+     * @param {*} userDetails 
+     * @param {*} callback 
+     */
+    create = (userDetails, callback) =>{
+        try{
+
+            const userSchema = new registerUser({
+
+                firstName: userDetails.firstName,
+                lastName: userDetails.lastName,
+                emailId: userDetails.emailId,
+                password: userDetails.password
+            });
+            userSchema.save(callback)
+        }catch(error){
+            return callback(error,null);
+        }
+    }
+}
+
+module.exports = new userModel();

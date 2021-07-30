@@ -15,7 +15,7 @@ app.get('/',(req,res) => {
 });
 
 //Requiring routes
-require('./app/routes/route.js')(app);
+require('./app/routes/routes.js')(app);
 
 //listen for request
 app.listen(process.env.PORT,()=>{

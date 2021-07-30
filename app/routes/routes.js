@@ -8,5 +8,5 @@
 const userController = require('../controllers/user.js')
 module.exports = (app) =>{
     //Registering a new user
-    app.post('/regsiterUser', userController.registerUser)
+    app.post('/registerUser', userController.registerUser)
 }
