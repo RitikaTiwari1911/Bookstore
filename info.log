@@ -17,3 +17,7 @@
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-07-30T19:49:42.520Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-07-30T19:49:55.470Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-07-30T19:49:59.591Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-07-30T19:53:19.856Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-07-30T19:53:36.474Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-07-30T19:56:04.886Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-07-30T20:02:31.125Z"}
