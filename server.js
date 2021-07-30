@@ -14,6 +14,9 @@ app.get('/',(req,res) => {
     res.json({"message":"Welcome to the Bookstore application 📚"});
 });
 
+//Requiring routes
+require('./app/routes/route.js')(app);
+
 //listen for request
 app.listen(process.env.PORT,()=>{
     console.log(`Server is listening at 3000`);
