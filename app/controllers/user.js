@@ -7,6 +7,7 @@
 -----------------------------------------------------------------------------------------------*/
 const userService = require('../services/user.js')
 const { userValidation } = require('../middleware/userValidation')
+const bcrypt = require('bcryptjs')
 
 class userController{
     registerUser = (req, res) => {

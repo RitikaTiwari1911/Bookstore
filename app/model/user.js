@@ -7,6 +7,7 @@
 -----------------------------------------------------------------------------------------------*/
 //connecting to the mongoDB through mongoose
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs')
 
 //schema for user of the bookstore
 const userSchema = mongoose.Schema({
@@ -34,6 +35,14 @@ const userSchema = mongoose.Schema({
         timestamps: true
     });
 
+//Encrypting password
+userSchema.pre("save",async function(next){
+    //This will hash the password if the password is modified by the user in future
+    if(this.isModified("password")){
+        this.password = await bcrypt.hash(this.password, 10)
+    }
+    next();
+})
     //exporting model module
     module.exports = mongoose.model("bookstore", userSchema)
 
