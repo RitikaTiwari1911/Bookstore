@@ -7,7 +7,7 @@ app.use(express.json())
 
 //define a simple route
 app.get('/',(req,res) => {
-    res.json({"message":"Welcome to the Bookstore application"});
+    res.json({"message":"Welcome to the Bookstore application 📚"});
 });
 
 //listen for request
