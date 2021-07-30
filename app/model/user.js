@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
     password:{
         type: String,
         required: true,
-        validate: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
+        validate: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/
     },
  }, {
         //Applying time stamp
@@ -41,7 +41,7 @@ const userSchema = mongoose.Schema({
 
 class userModel{
     /**
-     * @description registering address in the database
+     * @description registering user in the database
      * @param {*} userDetails 
      * @param {*} callback 
      */
