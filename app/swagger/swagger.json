@@ -1,0 +1,146 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Bookstore App",
+      "description": "Bookstore Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/registerUser": {
+        "post": {
+          "tags": [
+            "Add Details"
+          ],
+          "description": "Create new contact in system",
+          "parameters": [
+            {
+              "name": "add",
+              "in": "body",
+              "description": "contact that we want to create",
+              "schema": {
+                "$ref": "#/definitions/registerUser"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/definitions/register"
+          },
+          "responses": {
+            "200": {
+              "description": "New user is created"
+            },
+            
+            "400": {
+              "description": "Bad Request"
+            },
+            
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/userLogin": {
+        "post": {
+          "tags": [
+            "login"
+          ],
+          "description": "login user in system",
+          "parameters": [
+            {
+              "name": "login",
+              "in": "body",
+              "description": "User that we want to login",
+              "schema": {
+                "$ref": "#/definitions/login"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/definitions/login"
+          },
+          "responses": {
+            "200": {
+              "description": "New login"    
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            
+            "500": {
+              "description": "Internal server error"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      }
+    },
+    "definitions": {
+      "registerUser": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+              "type":"string"
+          },
+          "emailId": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "login": {
+        "type": "object",
+        "properties": {
+          "emailId" : {
+            "type" :"string"
+          },
+        "password": {
+          "type": "string"
+          }
+        }
+      } 
+    },
+    "securityDefinitions" : {
+      "JWT" : {
+        "type": "apiKey",
+        "name": "token",
+        "in": "header"
+      }
+    }
+  }

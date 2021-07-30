@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "joi": "^17.4.1",
     "mongoose": "^5.13.4",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "swagger-ui-express": "^4.1.6"
   }
 }
