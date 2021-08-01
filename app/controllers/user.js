@@ -20,7 +20,8 @@ class userController{
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 emailId: req.body.emailId,
-                password: req.body.password
+                password: req.body.password,
+                role: req.body.role
             }
 
             userService.createUser(userDetails, (error, data) => {

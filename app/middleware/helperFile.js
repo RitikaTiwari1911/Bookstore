@@ -9,11 +9,9 @@ class Helper{
      * @returns 
      */
     generateToken(loginInput){
-        console.log("token");
         const token = jwt.sign(loginInput, process.env.SECRET_KEY,{
             expiresIn: '3000s'
         });
-        console.log("token",token);
         return token;
     }
 

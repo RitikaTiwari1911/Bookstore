@@ -23,13 +23,19 @@ const userSchema = mongoose.Schema({
     },
     emailId:{
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password:{
         type: String,
         required: true,
         validate: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/
     },
+    role:{
+        type: String,
+        enum: ['regular','admin'],
+        default: 'regular'
+    }
  }, {
         //Applying time stamp
         timestamps: true
@@ -62,7 +68,8 @@ class userModel{
                 firstName: userDetails.firstName,
                 lastName: userDetails.lastName,
                 emailId: userDetails.emailId,
-                password: userDetails.password
+                password: userDetails.password,
+                role: userDetails.role
             });
             userSchema.save(callback)
         }catch(error){

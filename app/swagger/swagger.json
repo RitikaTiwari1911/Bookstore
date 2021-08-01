@@ -121,6 +121,9 @@
           },
           "password": {
             "type": "string"
+          },
+          "role(regular/admin)":{
+            "type": "string"
           }
         }
       },

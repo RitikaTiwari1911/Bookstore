@@ -13,6 +13,7 @@ const userValidation = joi.object({
     lastName: joi.string().min(3).max(30).pattern(new RegExp('^[a-zA-Z ]{3,30}$')).required(),
     emailId: joi.string().email().required().pattern(new RegExp()),
     password: joi.string().pattern(new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)).required(),
+    role:joi.string().required()
 });
 
 module.exports = {userValidation};
