@@ -122,7 +122,7 @@
           "password": {
             "type": "string"
           },
-          "role(regular/admin)":{
+          "role":{
             "type": "string"
           }
         }

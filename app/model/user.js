@@ -33,8 +33,8 @@ const userSchema = mongoose.Schema({
     },
     role:{
         type: String,
-        enum: ['regular','admin'],
-        default: 'regular'
+        enum: ['user','admin'],
+        default: 'user'
     }
  }, {
         //Applying time stamp
