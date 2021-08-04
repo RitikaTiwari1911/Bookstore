@@ -5,7 +5,7 @@ class RoleAuthorization{
      * grantAccess allows users with certain roles access to the routes
      * roles.can(req.user.role)[action](resource) method determines if the user role's has sufficient permissions to perform the specified action of the provided resource
      * @param {*} action action will have value such as readAny, deleteAny, etc.
-     * @param {*} resource resource represents wwhat resource the defined action has permission to operate on
+     * @param {*} resource resource represents what resource the defined action has permission to operate on
      * @returns 
      */
    grantAccess = (action, resource) =>{
@@ -13,7 +13,7 @@ class RoleAuthorization{
             try{
                 const permission = roles.can(req.user.role)[action](resource);
                 if(!permission.granted){
-                    return res.status(401).json({
+                    return res.status(403).json({
                         error: "You do not have the permission to perform this action!"
                     })
                 }
@@ -32,7 +32,7 @@ class RoleAuthorization{
             try{
                 const user = res.locals.loggedInUser;
                 if(!user)
-                return res.status(401).json({
+                return res.status(403).json({
                     error: "You need to be logged in to access this route"
                 })
                 req.user = user;

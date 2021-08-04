@@ -2,6 +2,7 @@ const express = require('express');
 const app  = express();
 const logger = require('./config/logger')
 
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./app/swagger/swagger.json')
 
@@ -10,7 +11,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
+ 
 //configuring the database
 const dbConnect = require('./config/database.config');
 dbConnect();

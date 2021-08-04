@@ -90,6 +90,9 @@ class userModel{
                 }else if (!data){
                     return callback("Invalid credentails",null)
                 }
+                else if (data.role != loginInput.role){
+                    return callback("Access denied!!", null)
+                }
                 return callback(null, data);
             })
         }catch(error){

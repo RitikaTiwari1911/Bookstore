@@ -41,6 +41,14 @@ class Helper{
         }) : 
         res.status(401).send({message: "Missing token! Unauthorized User!"})
     }
-}
 
+    //checkRole = (role)=>{
+    //    return (req, res, next) =>{
+    //        console.log(req.body)
+    //        return role === req.body.role ? next() : res.status(403).send({message: "Unauthorized login!"})
+    //    }
+    //   
+//
+    //}
+}
 module.exports = new Helper();

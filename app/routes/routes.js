@@ -6,10 +6,25 @@
  * @since        30/07/2021  
 -----------------------------------------------------------------------------------------------*/
 const userController = require('../controllers/user.js')
+const helper = require('../middleware/helperFile')
 module.exports = (app) =>{
     //Registering a new user
-    app.post('/registerUser', userController.registerUser)
+    app.post('/register-user', (req, res) => {
+        userController.registerUser(req, "user", res);
+    });
+
+    //Registering a new admin
+    app.post('/register-admin', (req, res) => {
+        userController.registerUser(req, "admin", res);
+    });
 
     //User login
-    app.post('/userLogin', userController.userLogin)
+    app.post('/user-login', (req, res) =>{
+        userController.userLogin(req, "user", res);
+    });
+
+    //Admin login
+    app.post('/admin-login',  (req, res) =>{
+        userController.userLogin(req, "admin", res);
+    })
 }

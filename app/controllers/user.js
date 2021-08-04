@@ -10,7 +10,7 @@ const { userValidation } = require('../middleware/userValidation')
 const bcrypt = require('bcryptjs')
 
 class userController{
-    registerUser = (req, res) => {
+    registerUser = (req, role, res) => {
         try{
             const validation = userValidation.validate(req.body)
             if(validation.error){
@@ -21,10 +21,10 @@ class userController{
                 lastName: req.body.lastName,
                 emailId: req.body.emailId,
                 password: req.body.password,
-                role: req.body.role
+                role: role
             }
 
-            userService.createUser(userDetails, (error, data) => {
+            userService.createUser(userDetails,(error, data) => {
                 return ((error) ?
                     res.status(400).send({
                         success: false,
@@ -34,7 +34,7 @@ class userController{
                 res.send({
                     success: true,
                     message: "You are successfully registered!!",
-                    data: data
+                    data: data,
                 }));
             });
         }catch(error){
@@ -51,16 +51,19 @@ class userController{
      * @param {*} res 
      * @returns 
      */
-     userLogin  = (req, res)=>{
+    userLogin  = (req, role, res)=>{
         try{
             const loginInput = {
                 emailId: req.body.emailId,
-                password: req.body.password
+                password: req.body.password,
+                role: role
+
+
             }
             userService.login(loginInput,(error, data)=>{
                 return((error)? res.status(400).send({
                     success: false,
-                    message: "Invalid credential"
+                    message: error
                 }) :
                 res.send({
                     success: true,
@@ -76,5 +79,4 @@ class userController{
         }
     }
 }
-
-module.exports = new userController();
+module.exports = new userController()

@@ -27,10 +27,10 @@
       "application/json"
     ],
     "paths": {
-      "/registerUser": {
+      "/register-user": {
         "post": {
           "tags": [
-            "Add Details"
+            "Registration"
           ],
           "description": "Create new contact in system",
           "parameters": [
@@ -64,10 +64,49 @@
           }
         }
       },
-      "/userLogin": {
+
+      "/register-admin": {
         "post": {
           "tags": [
-            "login"
+            "Registration"
+          ],
+          "description": "Create new contact in system",
+          "parameters": [
+            {
+              "name": "add",
+              "in": "body",
+              "description": "contact that we want to create",
+              "schema": {
+                "$ref": "#/definitions/registerUser"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "schema": {
+            "$ref": "#/definitions/register"
+          },
+          "responses": {
+            "200": {
+              "description": "New user is created"
+            },
+            
+            "400": {
+              "description": "Bad Request"
+            },
+            
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+
+      "/user-login": {
+        "post": {
+          "tags": [
+            "Login"
           ],
           "description": "login user in system",
           "parameters": [
@@ -97,15 +136,50 @@
             "500": {
               "description": "Internal server error"
             }
-          },
-          "security": [
-            {
-              "JWT": []
-            }
-          ]
+          }
         }
-    }
     },
+
+    "/admin-login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "login user in system",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "User that we want to login",
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schema": {
+          "$ref": "#/definitions/login"
+        },
+        "responses": {
+          "200": {
+            "description": "New login"    
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+  }
+},
+
+    
+
     "definitions": {
       "registerUser": {
         "type": "object",
@@ -120,9 +194,6 @@
             "type": "string"
           },
           "password": {
-            "type": "string"
-          },
-          "role":{
             "type": "string"
           }
         }

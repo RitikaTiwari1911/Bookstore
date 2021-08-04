@@ -33,6 +33,9 @@ class userService{
      login = (loginInput, callback)=>{
         try{
             userModel.login(loginInput,(error, data)=>{
+                if(!data){
+                    return callback("Unauthorized login!!", null)
+                }
                 if(helper.checkByBcrypt(loginInput.password, data.password)){
                     const token = helper.generateToken(loginInput)
                     return(token)?callback(null, token):callback("Incorrect password", null);
