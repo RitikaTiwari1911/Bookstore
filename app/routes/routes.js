@@ -26,5 +26,8 @@ module.exports = (app) =>{
     //Admin login
     app.post('/admin-login',  (req, res) =>{
         userController.userLogin(req, "admin", res);
-    })
+    });
+
+    //forgot password
+    app.post('/forgot-password', userController.forgotPassword)
 }

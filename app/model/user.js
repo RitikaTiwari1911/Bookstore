@@ -7,6 +7,7 @@
 -----------------------------------------------------------------------------------------------*/
 //connecting to the mongoDB through mongoose
 const mongoose = require('mongoose');
+const sendEmail = require('../../utils/mailGun')
 const bcrypt = require('bcryptjs')
 
 //schema for user of the bookstore
@@ -97,6 +98,23 @@ class userModel{
             })
         }catch(error){
             return callback(error, null);
+        }
+    }
+
+    forgotPass = (userDetails, callback) => {
+        try{
+            registerUser.findOne({'emailId': userDetails.emailId},(error, data) =>{
+                if(error){
+                    return callback(error, null);
+                }else if(!data){
+                    return callback(error, null);
+                }
+                return callback(null, data);
+            })
+
+            
+        }catch(error){
+            return callback(error, null)
         }
     }
 }

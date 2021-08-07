@@ -48,6 +48,26 @@ class userService{
             return callback(error,null);
         }
     }
+
+    forgotPass = (userDetails, callback) => {
+        try{
+           userModel.forgetPass(userDetails, (error, data) => {
+               console.log(data);
+               if (data){
+                   const details = {
+                    emailId: data.emailId,
+                    _id: data._id,
+                    role: result.role
+                   };
+                   return(error)? callback(error, null): callback(null, helper.sendingEmail(details));   
+               }else{
+                   callback('This email id does not exist')
+               }
+           })
+        }catch(error){
+            return error;
+        }
+    }
 }
 
 module.exports = new userService();

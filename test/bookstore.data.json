@@ -1,0 +1,15 @@
+{
+    "alreadyRegisteredUser":{
+        "firstName":"Diksha",
+        "lastName":"Mishra",
+        "emailId":"diksha@gmail.com",
+        "password":"diksha@1234"
+    },
+
+    "wrongInput":{
+        "firstName":"Diksha",
+        "lastName":"Mishra",
+        "emailId":"diksha@gmail.com",
+        "password":"diksha1234"
+    }
+}

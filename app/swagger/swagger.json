@@ -178,8 +178,6 @@
   }
 },
 
-    
-
     "definitions": {
       "registerUser": {
         "type": "object",

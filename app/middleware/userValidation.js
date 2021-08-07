@@ -11,9 +11,13 @@ const joi = require('joi');
 const userValidation = joi.object({
     firstName: joi.string().min(3).max(30).pattern(new RegExp('^[a-zA-Z ]{3,30}$')).required(),
     lastName: joi.string().min(3).max(30).pattern(new RegExp('^[a-zA-Z ]{3,30}$')).required(),
-    emailId: joi.string().email().required().pattern(new RegExp()),
+    emailId: joi.string().email().required().pattern(new RegExp()).required(),
     password: joi.string().pattern(new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)).required(),
     //role:joi.string()
 });
 
-module.exports = {userValidation};
+const forgotPasswordValidation = joi.object({
+    emailId: joi.string().email().required().pattern(new RegExp()).required()
+})
+
+module.exports = {userValidation, forgotPasswordValidation};
