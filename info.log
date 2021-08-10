@@ -300,3 +300,5 @@
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-10T19:50:03.744Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-10T19:53:22.354Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-10T19:58:31.214Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-10T20:01:53.674Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-10T20:07:39.528Z"}

@@ -1,6 +1,20 @@
+/**
+ * @module       utility
+ * @file         nodemailer.js
+ * @description  it contains the code for nodemailer to send email to user 
+ * @author       Ritika <spk2ritika1911@gmail.com>
+ * @since        11/08/2021  
+-----------------------------------------------------------------------------------------------*/
 const nodemailer = require('nodemailer')
 require('dotenv').config();
 
+/**
+ * @description used to send email to the user 
+ * @param {*} emailId 
+ * @param {*} subject 
+ * @param {*} link 
+ * @returns 
+ */
 const sendEmail = async(emailId, subject, link) =>{
     try{
         const transporter = nodemailer.createTransport({
@@ -13,7 +27,6 @@ const sendEmail = async(emailId, subject, link) =>{
             },
         });
 
-        //send email
         transporter.sendMail({
             from: process.env.EMAIL,
             to: emailId,
