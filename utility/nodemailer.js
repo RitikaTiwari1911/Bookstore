@@ -2,7 +2,6 @@ const nodemailer = require('nodemailer')
 require('dotenv').config();
 
 const sendEmail = async(emailId, subject, link) =>{
-    console.log("nodemailerS")
     try{
         const transporter = nodemailer.createTransport({
             host: 'smpt.gmail.com',
@@ -28,5 +27,7 @@ const sendEmail = async(emailId, subject, link) =>{
         }
     }
 
-
     module.exports = sendEmail;
+
+
+    

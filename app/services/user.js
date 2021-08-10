@@ -8,6 +8,7 @@
 const userModel = require('../model/user.js');
 const helper = require('../middleware/helperFile')
 const sendEmail = require('../../utility/nodemailer')
+require('dotenv').config();
 
 class userService{
     /**
@@ -61,9 +62,9 @@ class userService{
         userModel.forgotPass(emailId, (err, data) =>{
             return err? callback(err, null)
             : newToken = helper.generateToken(data),
-            link =`${'https://localhost:3000/reset-password/'}${newToken}`,
+            link =`${process.env.PASSWORD_URL}${newToken}`,
 
-            sendEmail(data.emailId, "Password Reset Request", link),
+            sendEmail(data.emailId, "Password Reset Link :: Bookstore Application", link),
             callback(null, link)
         })
     };
