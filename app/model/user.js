@@ -7,9 +7,8 @@
 -----------------------------------------------------------------------------------------------*/
 //connecting to the mongoDB through mongoose
 const mongoose = require('mongoose');
-const sendEmail = require('../../utils/mailGun')
 const bcrypt = require('bcryptjs')
-
+//const nodemailer = require("../../utility/nodemailer")
 //schema for user of the bookstore
 const userSchema = mongoose.Schema({
     firstName:{
@@ -101,21 +100,17 @@ class userModel{
         }
     }
 
-    forgotPass = (userDetails, callback) => {
-        try{
-            registerUser.findOne({'emailId': userDetails.emailId},(error, data) =>{
-                if(error){
-                    return callback(error, null);
-                }else if(!data){
-                    return callback(error, null);
-                }
-                return callback(null, data);
-            })
-
-            
-        }catch(error){
-            return callback(error, null)
-        }
+    /**
+     * @description mongoose function for forgot password
+     * @param {*} emailId 
+     * @param {*} callback 
+     */
+    forgotPass = (emailId, callback) => {
+        registerUser.findOne({emailId : emailId.emailId}, (err, data) => {
+            return err ? callback(err, null):
+            !data ? callback("email not found", null):
+            callback(null, data)
+        })
     }
 }
 

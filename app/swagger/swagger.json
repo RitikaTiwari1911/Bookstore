@@ -175,7 +175,43 @@
           }
         }
       }
-  }
+  },
+
+  "/forgot-password": {
+    "post": {
+        "tags": [
+            "BookStore"
+        ],
+        "summary": "Forgot Password",
+        "parameters": [
+            {
+                "in": "email",
+                "name": "body",
+                "description": "forgot password"
+            }
+        ],
+        "produces": [
+            "application/json"
+        ],
+        "responses": {
+            "200": {
+                "description": "sent mail successfully"
+            },
+            "400": {
+                "description": "Bad Request"
+            },
+            "404":{
+              "description": "Not Found"
+            },
+            "505":{
+              "description":"Internal server error"
+            },
+            "schema": {
+              "$ref": "#/definitions/forgot-password"
+            }
+        }
+    }
+}
 },
 
     "definitions": {
@@ -206,8 +242,15 @@
           "type": "string"
           }
         }
-      } 
-    },
+      },
+      "forgot-password":{
+        "type":"object",
+        "properties":{
+          "emailId":{
+            "type":"string"
+          }
+        }
+      },
     "securityDefinitions" : {
       "JWT" : {
         "type": "apiKey",
@@ -216,3 +259,4 @@
       }
     }
   }
+}

@@ -7,6 +7,7 @@
 -----------------------------------------------------------------------------------------------*/
 const userModel = require('../model/user.js');
 const helper = require('../middleware/helperFile')
+const sendEmail = require('../../utility/nodemailer')
 
 class userService{
     /**
@@ -49,25 +50,24 @@ class userService{
         }
     }
 
-    forgotPass = (userDetails, callback) => {
-        try{
-           userModel.forgetPass(userDetails, (error, data) => {
-               console.log(data);
-               if (data){
-                   const details = {
-                    emailId: data.emailId,
-                    _id: data._id,
-                    role: result.role
-                   };
-                   return(error)? callback(error, null): callback(null, helper.sendingEmail(details));   
-               }else{
-                   callback('This email id does not exist')
-               }
-           })
-        }catch(error){
-            return error;
-        }
-    }
+    /**
+     * @description it acts as a middleware between controller and model for forgot password
+     * @param {*} emailId 
+     * @param {*} callback 
+     */
+    forgotPass = (emailId, callback) =>{
+        let link;
+        let newToken;
+        userModel.forgotPass(emailId, (err, data) =>{
+            return err? callback(err, null)
+            : newToken = helper.generateToken(data),
+            link =`${'https://localhost:3000/reset-password/'}${newToken}`,
+
+            sendEmail(data.emailId, "Password Reset Request", link),
+            callback(null, link)
+        })
+    };
 }
+
 
 module.exports = new userService();

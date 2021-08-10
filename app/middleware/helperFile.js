@@ -9,7 +9,7 @@ class Helper{
      * @returns 
      */
     generateToken(loginInput){
-        const token = jwt.sign(loginInput, process.env.SECRET_KEY,{
+        const token = jwt.sign(loginInput.toJSON(), process.env.SECRET_KEY,{
             expiresIn: '3000s'
         });
         return token;
@@ -42,13 +42,13 @@ class Helper{
         res.status(401).send({message: "Missing token! Unauthorized User!"})
     }
 
-    //checkRole = (role)=>{
-    //    return (req, res, next) =>{
-    //        console.log(req.body)
-    //        return role === req.body.role ? next() : res.status(403).send({message: "Unauthorized login!"})
-    //    }
-    //   
-//
-    //}
+    setRole = (role) => {
+        console.log(req.body)
+        return(req, res, next) =>{
+            req.role = role;
+            
+            next();
+        }
+    }
 }
 module.exports = new Helper();

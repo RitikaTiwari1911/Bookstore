@@ -70,40 +70,44 @@ class userController{
                 }));                
             });
         }catch(error){
-            return res.send(500).send({
+            return res.status(500).send({
                 success: false,
                 message: error.message
             });
         }
     }
 
-    forgotPassword = (res, req) => {
-        try{
-            const validation = forgotPasswordValidation.validate(req.body)
-            if(validation.error){
-                res.status(400).send({message:validation.error.details[0].message})
-            }
-
-            const userDetails = {
-                emailId: req.body.emailId
-            }
-            userService.forgotPass(userDetails,(error, data)=>{
-                return((error)? res.status(400).send({
-                    success: false,
-                    message: error
-                }) :
-                res.send({
-                    success: true,
-                    message: "Email sent successfully",
-                    data: data
-                }));                
-            });
-        }catch(error){
-            return res.send(500).send({
-                success: false,
-                message: error.message
-            });
+  
+    /**
+     * description controller function for forgot password
+     * @param {*} req 
+     * @param {*} res 
+     * @returns 
+     */
+   forgotPassword = (req, res) =>{
+       try{
+        var userData = {
+            emailId: req.body.emailId,
         }
+        userService.forgotPass(userData, (error, data) => {
+            return error ? res.status(400).send({
+                success: false,
+                message: error
+            }):
+            res.status({
+                success: true,
+                message: "Link sent successfully",
+                data: data
+            })
+        })
+       }catch(error){
+           return res.status(500).send({
+               sucess: false,
+               message: error.message
+           })
+       } 
     }
 }
+
+
 module.exports = new userController()
