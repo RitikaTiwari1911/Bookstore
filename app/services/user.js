@@ -23,7 +23,7 @@ class userService{
                     logger.error("Error expected during registration", error);
                     callback(error, null)
                 }else{
-                    //logger.info("User registered successfully!!", data);
+                    logger.info("User registered successfully!!", data);
                     callback(null, data)
                 }
                 })
@@ -78,16 +78,18 @@ class userService{
             link =`${process.env.PASSWORD_URL}${newToken}`,
             sendEmail(data.emailId, "Password Reset Link :: Bookstore Application", link),
             callback(null, link)
+            logger.info("Password rest link sent successfully", data)
         })
         }catch(error){
             return callback(error, null)
+           
         }
         
     };
 
     passwordReset = (userInput, callback) => {
         try{
-            var emailId = helper.getEmailFromToken(userInput.token)
+        var emailId = helper.getEmailFromToken(userInput.token)
         var inputData = {
             emailId: emailId,
             password: userInput.password
@@ -98,6 +100,7 @@ class userService{
                 logger.error("Some error occured while updating password", error)
                 callback(error, null)
              }else{
+                 logger.info("Password has been reset successfully", data)
                 callback(null, data)
              } 
         })
