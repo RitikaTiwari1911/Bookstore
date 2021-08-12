@@ -9,7 +9,7 @@ const userModel = require('../model/user.js');
 const helper = require('../middleware/helperFile')
 const sendEmail = require('../../utility/nodemailer')
 require('dotenv').config();
-
+const logger = require('../../config/logger')
 class userService{
     /**
      * @param {*} userDetails 
@@ -19,8 +19,14 @@ class userService{
     createUser = (userDetails, callback) => {
         try{
             userModel.create(userDetails, (error, data) => {
-                return error? callback(error, null): callback(null, data)    
-            })
+                if(error){
+                    logger.error("Error expected during registration", error);
+                    callback(error, null)
+                }else{
+                    //logger.info("User registered successfully!!", data);
+                    callback(null, data)
+                }
+                })
         }catch(error){
             return callback(error,null);
         }
@@ -36,6 +42,7 @@ class userService{
         try{
             userModel.login(loginInput,(error, data)=>{
                 if(!data){
+                    logger.error("Unauthorized login", error);
                     return callback("Unauthorized login!!", null)
                 }
                 if(helper.checkByBcrypt(loginInput.password, data.password)){
@@ -43,6 +50,7 @@ class userService{
                     return(token)?callback(null, token):callback("Incorrect password", null);
                 }
                 else if(error){
+                    logger.error("Some error occured while loggin in!", error);
                     callback(error, null)
                 }
             })
@@ -59,15 +67,35 @@ class userService{
     forgotPass = (emailId, callback) =>{
         let link;
         let newToken;
-        userModel.forgotPass(emailId, (err, data) =>{
-            return err? callback(err, null)
-            : newToken = helper.generateToken(data),
+        userModel.forgotPass(emailId, (error, data) =>{
+            if(error){
+                logger.error("Some error occured", error)
+                callback(error, null)
+             }else{
+                newToken = helper.generateToken(data)
+             } 
             link =`${process.env.PASSWORD_URL}${newToken}`,
-
             sendEmail(data.emailId, "Password Reset Link :: Bookstore Application", link),
             callback(null, link)
         })
     };
+
+    passwordReset = (userInput, callback) => {
+        var emailId = helper.getEmailFromToken(userInput.token)
+        var inputData = {
+            emailId: emailId,
+            password: userInput.password
+        }
+
+        userModel.updatePassword(inputData, (error, data) =>{
+            if(error){
+                logger.error("Some error occured while updating password", error)
+                callback(error, null)
+             }else{
+                callback(null, data)
+             } 
+        })
+    }
 }
 
 

@@ -20,4 +20,8 @@ const forgotPasswordValidation = joi.object({
     emailId: joi.string().email().required().pattern(new RegExp()).required()
 })
 
-module.exports = {userValidation, forgotPasswordValidation};
+const resetPasswordValidation = joi.object({
+    password: joi.string().pattern(new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)).required()
+})
+
+module.exports = {userValidation, forgotPasswordValidation, resetPasswordValidation};

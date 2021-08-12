@@ -50,5 +50,10 @@ class Helper{
             next();
         }
     }
+
+    getEmailFromToken(token){
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        return decoded.emailId
+    }
 }
 module.exports = new Helper();

@@ -32,5 +32,5 @@ module.exports = (app) =>{
     app.post('/forgot-password', userController.forgotPassword)
 
     //reset password
-   // app.post('/reset-password', helper.checkToken, userController.resetPassword)
+    app.put('/reset-password', userController.resetPassword)
 }

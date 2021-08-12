@@ -1,0 +1,2 @@
+{"errno":-4058,"syscall":"open","code":"ENOENT","path":"../view/email.ejs","level":"error","timestamp":"2021-08-11T14:49:02.815Z"}
+{"errno":-4058,"syscall":"open","code":"ENOENT","path":"../view/email.ejs","level":"error","timestamp":"2021-08-11T14:50:01.934Z"}

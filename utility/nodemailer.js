@@ -41,6 +41,3 @@ const sendEmail = async(emailId, subject, link) =>{
     }
 
     module.exports = sendEmail;
-
-
-    

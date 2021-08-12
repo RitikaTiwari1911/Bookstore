@@ -6,7 +6,7 @@
  * @since        30/07/2021  
 -----------------------------------------------------------------------------------------------*/
 const userService = require('../services/user.js')
-const { userValidation, forgotPasswordValidation } = require('../middleware/userValidation')
+const { userValidation, forgotPasswordValidation, resetPasswordValidation } = require('../middleware/userValidation')
 const bcrypt = require('bcryptjs')
 
 class userController{
@@ -90,15 +90,14 @@ class userController{
             emailId: req.body.emailId,
         }
         userService.forgotPass(userData, (error, data) => {
-            return error ? res.status(400).send({
+            return ((error) ? res.status(400).send({
                 success: false,
                 message: error
             }):
             res.status({
                 success: true,
                 message: "Link sent successfully",
-                data: data
-            })
+            }));
         })
        }catch(error){
            return res.status(500).send({
@@ -106,6 +105,40 @@ class userController{
                message: error.message
            })
        } 
+    }
+
+    resetPassword = (req, res) =>{
+        try{
+            const passwordValidation = resetPasswordValidation.validate(req.body);
+            if(passwordValidation.error){
+                res.status(400).send({message:passwordValidation.error.details[0].message})
+            }
+
+            const userData = {
+                token: req.headers.token,
+                password: req.body.password
+            }
+            userService.passwordReset(userData, (error, data) => {
+                return ((error)? res.status(400).send({
+                    sucess: false,
+                    message: error
+                }):
+                res.status(200).send({
+                    success: true,
+                    message: "Your password has been reset successfully!!",
+                    data: data
+                }))  
+            })
+
+        }catch(error){
+            return res.status(500).send({
+                sucess: false,
+                message: error.message
+
+            })
+        }
+
+
     }
 }
 
