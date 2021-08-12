@@ -41,7 +41,6 @@ class UserService {
      * @param {*} callback
      * @returns
      */
-     // eslint-disable-next-line consistent-return
      login = (loginInput, callback) => {
        try {
          userModel.login(loginInput, (error, data) => {
@@ -68,7 +67,6 @@ class UserService {
      * @param {*} emailId
      * @param {*} callback
      */
-    // eslint-disable-next-line consistent-return
     forgotPass = (emailId, callback) => {
       try {
         let link;
@@ -91,7 +89,12 @@ class UserService {
       }
     };
 
-    // eslint-disable-next-line consistent-return
+    /**
+     * @description it acts as a middleware between controller and model for reset password
+     * @param {*} userInput
+     * @param {*} callback
+     * @returns
+     */
     passwordReset = (userInput, callback) => {
       try {
         const emailId = helper.getEmailFromToken(userInput.token);

@@ -1,3 +1,8 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable consistent-return */
+/* eslint-disable no-shadow */
+/* eslint-disable func-names */
+/* eslint-disable max-len */
 /**
  * @module       Model
  * @file         user.js
@@ -54,13 +59,14 @@ module.exports = mongoose.model('bookstore', userSchema);
 
 const RegisterUser = mongoose.model('RegisterUser', userSchema);
 
-class userModel {
+class UserModel {
     /**
      * @description registering user in the database
      * @param {*} userDetails
      * @param {*} callback
      */
      // eslint-disable-line
+    // eslint-disable-next-line consistent-return
     create = (userDetails, callback) => {
       try {
         // eslint-disable-line 
@@ -108,6 +114,7 @@ class userModel {
      */
     forgotPass = (emailId, callback) => {
       try {
+        // eslint-disable-next-line no-nested-ternary
         RegisterUser.findOne({ emailId: emailId.emailId }, (err, data) => (err ? callback(err, null)
           : !data ? callback('email not found', null)
             : callback(null, data)));
@@ -116,6 +123,12 @@ class userModel {
       }
     }
 
+    /**
+     * @description mongooose method for reseting the password
+     * @param {*} inputData 
+     * @param {*} callback 
+     * @returns 
+     */
     updatePassword = async (inputData, callback) => {
       try {
         const data = await RegisterUser.findOne({ emailId: inputData.emailId });
@@ -127,4 +140,4 @@ class userModel {
     }
 }
 
-module.exports = new userModel();
+module.exports = new UserModel();

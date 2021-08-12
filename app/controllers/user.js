@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /**
  * @module       controller
  * @file         user.js
@@ -9,6 +10,7 @@ const userService = require('../services/user');
 const { userValidation, resetPasswordValidation } = require('../middleware/userValidation');
 
 class UserController {
+    // eslint-disable-next-line consistent-return
     registerUser = (req, role, res) => {
       try {
         const validation = userValidation.validate(req.body);
@@ -48,6 +50,7 @@ class UserController {
      * @param {*} res
      * @returns
      */
+
     userLogin = (req, role, res) => {
       try {
         const loginInput = {

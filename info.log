@@ -416,3 +416,11 @@
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T18:34:20.063Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T18:34:37.798Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T18:47:25.779Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T19:00:02.642Z"}
+{"$__":{"strictMode":true,"selected":{},"getters":{},"_id":"610fbfd13f47b71664801381","wasPopulated":false,"activePaths":{"paths":{"password":"init","emailId":"init","lastName":"init","firstName":"init","role":"init","_id":"init","createdAt":"init","updatedAt":"init","__v":"init"},"states":{"ignore":{},"default":{},"init":{"_id":true,"role":true,"firstName":true,"lastName":true,"emailId":true,"password":true,"createdAt":true,"updatedAt":true,"__v":true},"modify":{},"require":{}},"stateNames":["require","modify","init","default","ignore"]},"pathsToScopes":{},"cachedRequired":{},"session":null,"$setCalled":{},"emitter":{"_events":{},"_eventsCount":0,"_maxListeners":0},"$options":{"skipId":true,"isNew":false,"willInit":true,"defaults":true}},"isNew":false,"$locals":{},"$op":null,"_doc":{"role":"user","_id":"610fbfd13f47b71664801381","firstName":"Ritika","lastName":"Tiwari","emailId":"ritikatiwari1911@gmail.com","password":"$2a$10$WM2qI1aPVNacO/bap9q//urHs/x4mZdXvnB2xP5dFHtKARmWnRkwG","createdAt":"2021-08-08T11:28:18.018Z","updatedAt":"2021-08-12T14:28:16.035Z","__v":0},"$init":true,"level":"info","message":"Password rest link sent successfully","timestamp":"2021-08-12T19:05:15.264Z"}
+{"level":"info","message":"info","timestamp":"2021-08-12T19:05:19.229Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T19:10:18.854Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T19:11:50.777Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T19:12:10.224Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T19:13:18.879Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T19:14:38.257Z"}
