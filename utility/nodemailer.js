@@ -32,7 +32,7 @@ const sendEmail = async(emailId, subject, link) =>{
 
         ejs.renderFile('view/email.ejs', (error, result) =>{
             if(error){
-                logger.log("nodemailer error", error)
+                logger.error("nodemailer error", error)
             }else{
                 const mailOptions = {
                     from: process.env.EMAIL,
@@ -43,7 +43,7 @@ const sendEmail = async(emailId, subject, link) =>{
                 }
 
         transporter.sendMail(mailOptions,(error, info) =>{
-            const sendEmailInfo = error? logger.log('error',error):logger.log('info', info);
+            const sendEmailInfo = error? logger.error('error',error):logger.info('info', info);
             return sendEmailInfo;
 
             })
