@@ -333,3 +333,7 @@
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:22:48.249Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:26:13.686Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:27:43.415Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:29:39.228Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:31:22.415Z"}
+{"accepted":["ritikatiwari1911@gmail.com"],"rejected":[],"envelopeTime":1426,"messageTime":920,"messageSize":974,"response":"250 2.0.0 OK  1628778760 8sm3755753pfo.153 - gsmtp","envelope":{"from":"ritikatiwari1911@gmail.com","to":["ritikatiwari1911@gmail.com"]},"messageId":"<869fba33-c469-a69a-109b-b1dd5d889f60@gmail.com>","level":"info","timestamp":"2021-08-12T14:32:34.853Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:34:17.715Z"}

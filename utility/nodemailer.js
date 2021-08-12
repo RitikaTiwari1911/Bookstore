@@ -34,12 +34,13 @@ const sendEmail = async(emailId, subject, link) =>{
             to: emailId,
             subject: subject,
             html: `
-            <h2>Please click on the link</h2>
+            <h2>Please click on the link to reset password :: Bookstore</h2>
             <p>${link}</p>`
         }
 
         transporter.sendMail(mailOptions,(error, info) =>{
             const sendEmailInfo = error? logger.log('error',error):logger.log('info', info);
+            return sendEmailInfo;
 
         })
 
