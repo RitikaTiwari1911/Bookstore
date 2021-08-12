@@ -8,6 +8,7 @@
 const nodemailer = require('nodemailer')
 require('dotenv').config();
 const logger = require('../config/logger')
+const ejs = require('ejs')
 
 
 /**
@@ -29,24 +30,30 @@ const sendEmail = async(emailId, subject, link) =>{
             },
         });
 
-        const mailOptions = {
-            from: process.env.EMAIL,
-            to: emailId,
-            subject: subject,
-            html: `
-            <h2>Please click on the link to reset password :: Bookstore</h2>
-            <p>${link}</p>`
-        }
+        ejs.renderFile('view/email.ejs', (error, result) =>{
+            if(error){
+                logger.log("nodemailer error", error)
+            }else{
+                const mailOptions = {
+                    from: process.env.EMAIL,
+                    to: emailId,
+                    subject: subject,
+                    html: `
+                    ${result}<p>${link}</p>`
+                }
 
         transporter.sendMail(mailOptions,(error, info) =>{
             const sendEmailInfo = error? logger.log('error',error):logger.log('info', info);
             return sendEmailInfo;
 
-        })
+            })
+        }
+    })
+    
 
     }catch(error){
             return error;
         }
     }
 
-    module.exports = sendEmail;
+module.exports = sendEmail;
