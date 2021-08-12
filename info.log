@@ -328,3 +328,8 @@
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T03:21:22.649Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T03:23:55.783Z"}
 {"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T03:24:14.466Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:14:21.434Z"}
+{"accepted":["ritikatiwari1911@gmail.com"],"rejected":[],"envelopeTime":1078,"messageTime":941,"messageSize":974,"response":"250 2.0.0 OK  1628777814 h24sm2452923pjv.3 - gsmtp","envelope":{"from":"ritikatiwari1911@gmail.com","to":["ritikatiwari1911@gmail.com"]},"messageId":"<948b33cc-5934-f8b0-3721-462bf4cd646f@gmail.com>","level":"info","timestamp":"2021-08-12T14:16:48.998Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:22:48.249Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:26:13.686Z"}
+{"level":"info","message":"Server is listening at port ${process.env.PORT}","timestamp":"2021-08-12T14:27:43.415Z"}

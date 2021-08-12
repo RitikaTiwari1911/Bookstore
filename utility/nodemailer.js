@@ -7,6 +7,8 @@
 -----------------------------------------------------------------------------------------------*/
 const nodemailer = require('nodemailer')
 require('dotenv').config();
+const logger = require('../config/logger')
+
 
 /**
  * @description used to send email to the user 
@@ -27,14 +29,20 @@ const sendEmail = async(emailId, subject, link) =>{
             },
         });
 
-        transporter.sendMail({
+        const mailOptions = {
             from: process.env.EMAIL,
             to: emailId,
             subject: subject,
             html: `
             <h2>Please click on the link</h2>
             <p>${link}</p>`
+        }
+
+        transporter.sendMail(mailOptions,(error, info) =>{
+            const sendEmailInfo = error? logger.log('error',error):logger.log('info', info);
+
         })
+
     }catch(error){
             return error;
         }

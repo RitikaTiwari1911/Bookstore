@@ -106,21 +106,31 @@ class userModel{
      * @param {*} callback 
      */
     forgotPass = (emailId, callback) => {
-        registerUser.findOne({emailId : emailId.emailId}, (err, data) => {
-            return err ? callback(err, null):
-            !data ? callback("email not found", null):
-            callback(null, data)
-        })
+        try{
+            registerUser.findOne({emailId : emailId.emailId}, (err, data) => {
+                return err ? callback(err, null):
+                !data ? callback("email not found", null):
+                callback(null, data)
+            })
+        }catch(error){
+            return callback(error, null)
+        }
+        
     }
 
     updatePassword = async(inputData, callback) =>{
-        let data = await registerUser.findOne({emailId: inputData.emailId})
-        let hash = bcrypt.hashSync(inputData.password,10,(error, hashPassword) =>{
-            return error? error: hashPassword
-        })
-        registerUser.findByIdAndUpdate(data._id, {password: hash},(error, data) => {
-            return error ? callback(error, null) : callback(null, data)
-        })
+        try{
+            let data = await registerUser.findOne({emailId: inputData.emailId})
+            let hash = bcrypt.hashSync(inputData.password,10,(error, hashPassword) =>{
+                return error? error: hashPassword
+            })
+            registerUser.findByIdAndUpdate(data._id, {password: hash},(error, data) => {
+                return error ? callback(error, null) : callback(null, data)
+            })
+        }catch(error){
+            return callback(error, null)
+        }
+        
     }
 }
 

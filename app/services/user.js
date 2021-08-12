@@ -65,7 +65,8 @@ class userService{
      * @param {*} callback 
      */
     forgotPass = (emailId, callback) =>{
-        let link;
+        try{
+            let link;
         let newToken;
         userModel.forgotPass(emailId, (error, data) =>{
             if(error){
@@ -78,10 +79,15 @@ class userService{
             sendEmail(data.emailId, "Password Reset Link :: Bookstore Application", link),
             callback(null, link)
         })
+        }catch(error){
+            return callback(error, null)
+        }
+        
     };
 
     passwordReset = (userInput, callback) => {
-        var emailId = helper.getEmailFromToken(userInput.token)
+        try{
+            var emailId = helper.getEmailFromToken(userInput.token)
         var inputData = {
             emailId: emailId,
             password: userInput.password
@@ -95,6 +101,10 @@ class userService{
                 callback(null, data)
              } 
         })
+        }catch(error){
+            return callback(error, null)
+        }
+        
     }
 }
 
