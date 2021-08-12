@@ -1,36 +1,36 @@
 /**
  * @module       app
  * @file         routes.js
- * @description  it contains the http methods 
+ * @description  it contains the http methods
  * @author       Ritika <spk2ritika1911@gmail.com>
- * @since        30/07/2021  
+ * @since        30/07/2021
 -----------------------------------------------------------------------------------------------*/
-const userController = require('../controllers/user.js')
-const helper = require('../middleware/helperFile')
-module.exports = (app) =>{
-    //Registering a new user
-    app.post('/register-user', (req, res) => {
-        userController.registerUser(req, "user", res);
-    });
+const userController = require('../controllers/user');
 
-    //Registering a new admin
-    app.post('/register-admin', (req, res) => {
-        userController.registerUser(req, "admin", res);
-    });
+module.exports = (app) => {
+  // Registering a new user
+  app.post('/register-user', (req, res) => {
+    userController.registerUser(req, 'user', res);
+  });
 
-    //User login
-    app.post('/user-login', (req, res) =>{
-        userController.userLogin(req, "user", res);
-    });
+  // Registering a new admin
+  app.post('/register-admin', (req, res) => {
+    userController.registerUser(req, 'admin', res);
+  });
 
-    //Admin login
-    app.post('/admin-login',  (req, res) =>{
-        userController.userLogin(req, "admin", res);
-    });
+  // User login
+  app.post('/user-login', (req, res) => {
+    userController.userLogin(req, 'user', res);
+  });
 
-    //forgot password
-    app.post('/forgot-password', userController.forgotPassword)
+  // Admin login
+  app.post('/admin-login', (req, res) => {
+    userController.userLogin(req, 'admin', res);
+  });
 
-    //reset password
-    app.put('/reset-password', userController.resetPassword)
-}
+  // forgot password
+  app.post('/forgot-password', userController.forgotPassword);
+
+  // reset password
+  app.put('/reset-password', userController.resetPassword);
+};

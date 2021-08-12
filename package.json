@@ -4,7 +4,10 @@
   "description": "The is a Bookstore app",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node server.js",
+    "lint": "eslint ./",
+    "lint-fix": "eslint ./ --fix"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
   "homepage": "https://github.com/RitikaTiwari1911/Bookstore#readme",
   "dependencies": {
     "accesscontrol": "^2.2.1",
+    "babel-eslint": "^10.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.3.4",
@@ -41,5 +45,13 @@
     "nodemon": "^2.0.12",
     "swagger-ui-express": "^4.1.6",
     "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

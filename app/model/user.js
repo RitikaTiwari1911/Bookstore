@@ -1,136 +1,129 @@
 /**
  * @module       Model
  * @file         user.js
- * @description  schema holds the database Schema 
+ * @description  schema holds the database Schema
  * @author       Ritika <spk2ritika1911@gmail.com>
- * @since        30/07/2021  
+ * @since        30/07/2021
 -----------------------------------------------------------------------------------------------*/
-//connecting to the mongoDB through mongoose
+// connecting to the mongoDB through mongoose
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs')
-//const nodemailer = require("../../utility/nodemailer")
-//schema for user of the bookstore
+const bcrypt = require('bcryptjs');
+// const nodemailer = require("../../utility/nodemailer")
+// schema for user of the bookstore
 const userSchema = mongoose.Schema({
-    firstName:{
-        type: String,
-        required: true,
-        validate: /^[a-zA-Z ]{3,30}$/
-    },
-    lastName: {
-        type: String,
-        required: true,
-        validate: /^[a-zA-Z ]{3,30}$/
-    },
-    emailId:{
-        type: String,
-        required: true,
-        unique: true
-    },
-    password:{
-        type: String,
-        required: true,
-        validate: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/
-    },
-    role:{
-        type: String,
-        enum: ['user','admin'],
-        default: 'user'
-    }
- }, {
-        //Applying time stamp
-        timestamps: true
-    });
+  firstName: {
+    type: String,
+    required: true,
+    validate: /^[a-zA-Z ]{3,30}$/,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    validate: /^[a-zA-Z ]{3,30}$/,
+  },
+  emailId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    validate: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/,
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user',
+  },
+}, {
+  // Applying time stamp
+  timestamps: true,
+});
 
-//Encrypting password
-userSchema.pre("save",async function(next){
-    //This will hash the password if the password is modified by the user in future
-    if(this.isModified("password")){
-        this.password = await bcrypt.hash(this.password, 10)
-    }
-    next();
-})
-    //exporting model module
-    module.exports = mongoose.model("bookstore", userSchema)
+// Encrypting password
+userSchema.pre('save', async function (next) {
+  // This will hash the password if the password is modified by the user in future
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
+});
+// exporting model module
+module.exports = mongoose.model('bookstore', userSchema);
 
-    const registerUser = mongoose.model('registerUser',userSchema)
+const RegisterUser = mongoose.model('RegisterUser', userSchema);
 
-class userModel{
+class userModel {
     /**
      * @description registering user in the database
-     * @param {*} userDetails 
-     * @param {*} callback 
+     * @param {*} userDetails
+     * @param {*} callback
      */
-    create = (userDetails, callback) =>{
-        try{
+     // eslint-disable-line
+    create = (userDetails, callback) => {
+      try {
+        // eslint-disable-line 
+        const userSchema = new RegisterUser({
 
-            const userSchema = new registerUser({
-
-                firstName: userDetails.firstName,
-                lastName: userDetails.lastName,
-                emailId: userDetails.emailId,
-                password: userDetails.password,
-                role: userDetails.role
-            });
-            userSchema.save(callback)
-        }catch(error){
-            return callback(error,null);
-        }
+          firstName: userDetails.firstName,
+          lastName: userDetails.lastName,
+          emailId: userDetails.emailId,
+          password: userDetails.password,
+          role: userDetails.role,
+        });
+        userSchema.save(callback);
+      } catch (error) {
+        return callback(error, null);
+      }
     }
 
-    /**@description user login 
-     * @param {*} loginInput 
-     * @param {*} callback 
-     * @returns 
+    /** @description user login
+     * @param {*} loginInput
+     * @param {*} callback
+     * @returns
      */
-     login = (loginInput, callback) =>{
-        try{
-            registerUser.findOne({'emailId':loginInput.emailId},(error,data)=>{
-                if(error){
-                    return callback(error,null);
-                }else if (!data){
-                    return callback("Invalid credentails",null)
-                }
-                else if (data.role != loginInput.role){
-                    return callback("Access denied!!", null)
-                }
-                return callback(null, data);
-            })
-        }catch(error){
-            return callback(error, null);
-        }
-    }
+     login = (loginInput, callback) => {
+       try {
+         RegisterUser.findOne({ emailId: loginInput.emailId }, (error, data) => {
+           if (error) {
+             return callback(error, null);
+           } if (!data) {
+             return callback('Invalid credentails', null);
+           }
+           if (data.role !== loginInput.role) {
+             return callback('Access denied!!', null);
+           }
+           return callback(null, data);
+         });
+       } catch (error) {
+         return callback(error, null);
+       }
+     }
 
     /**
      * @description mongoose function for forgot password
-     * @param {*} emailId 
-     * @param {*} callback 
+     * @param {*} emailId
+     * @param {*} callback
      */
     forgotPass = (emailId, callback) => {
-        try{
-            registerUser.findOne({emailId : emailId.emailId}, (err, data) => {
-                return err ? callback(err, null):
-                !data ? callback("email not found", null):
-                callback(null, data)
-            })
-        }catch(error){
-            return callback(error, null)
-        }
-        
+      try {
+        RegisterUser.findOne({ emailId: emailId.emailId }, (err, data) => (err ? callback(err, null)
+          : !data ? callback('email not found', null)
+            : callback(null, data)));
+      } catch (error) {
+        return callback(error, null);
+      }
     }
 
-    updatePassword = async(inputData, callback) =>{
-        try{
-            let data = await registerUser.findOne({emailId: inputData.emailId})
-            let hash = bcrypt.hashSync(inputData.password,10,(error, hashPassword) =>{
-                return error? error: hashPassword
-            })
-            registerUser.findByIdAndUpdate(data._id, {password: hash},(error, data) => {
-                return error ? callback(error, null) : callback(null, data)
-            })
-        }catch(error){
-            return callback(error, null)
-        }
-        
+    updatePassword = async (inputData, callback) => {
+      try {
+        const data = await RegisterUser.findOne({ emailId: inputData.emailId });
+        const hash = bcrypt.hashSync(inputData.password, 10, (error, hashPassword) => error || hashPassword);
+        RegisterUser.findByIdAndUpdate(data._id, { password: hash }, (error, data) => (error ? callback(error, null) : callback(null, data)));
+      } catch (error) {
+        return callback(error, null);
+      }
     }
 }
 
