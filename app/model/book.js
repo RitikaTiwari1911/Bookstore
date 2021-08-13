@@ -1,6 +1,14 @@
 /* eslint-disable consistent-return */
 /* eslint-disable max-len */
 /* eslint-disable no-use-before-define */
+
+/**
+ * @module       Model
+ * @file         book.js
+ * @description  schema holds the database Schema
+ * @author       Ritika <spk2ritika1911@gmail.com>
+ * @since        13/08/2021
+-----------------------------------------------------------------------------------------------*/
 const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema(
@@ -48,30 +56,47 @@ const bookSchema = new mongoose.Schema(
 const Book = mongoose.model('book', bookSchema);
 
 class BookModel {
+        /**
+         * @description mongoose methods for create book
+         * @param {*} bookData 
+         */
         createBook = async (bookData) => {
           const book = new Book(bookData);
           await book.save();
         }
 
+        /**
+         * @description mongoose method for getting books
+         * @param {*} callback 
+         */
        get = (callback) => {
          Book.find({}, (error, data) => ((error) ? (callback(error, null)) : (callback(null, data))));
        }
 
-       updateBook = (bookId, bookDetails, callback) => {
-         try {
-           Book.findByIdAndUpdate(bookId, {
-             author: bookDetails.author,
-             title: bookDetails.title,
-             quantity: bookDetails.quantity,
-             price: bookDetails.price,
-             description: bookDetails.description,
-             image: bookDetails.image,
-           }, (error, data) => ((error) ? (callback(error, null)) : callback(null, data)));
-         } catch (error) {
-           return callback(null);
-         }
-       }
+       /**
+        * @description mongoose method for updating books
+        * @param {*} data 
+        * @returns 
+        */
+       updateBook = (data) => new Promise((resolve, reject) => {
+         Book.findByIdAndUpdate(data.bookId, {
+           author: data.author,
+           title: data.title,
+           image: data.image,
+           quantity: data.quantity,
+           price: data.price,
+           description: data.description,
+         })
+           .then((book) => resolve(book))
+           .catch((err) => reject(err));
+       })
 
+       /**
+        * @description mongoose method for deleting books
+        * @param {*} bookId 
+        * @param {*} callback 
+        * @returns 
+        */
        deleteBook = (bookId, callback) => {
          try {
            Book.findByIdAndRemove(bookId, (error, data) => ((error) ? callback(error, null) : callback(null, data)));

@@ -1,3 +1,4 @@
+/* eslint-disable */
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -9,7 +10,7 @@ class Helper {
      * @returns
      */
   generateToken(loginInput) {
-    const token = jwt.sign(loginInput.toJSON(), process.env.SECRET_KEY, {
+    const token = jwt.sign(loginInput, process.env.SECRET_KEY, {
       expiresIn: '3000s',
     });
     return token;
@@ -39,15 +40,6 @@ class Helper {
       ? jwt.verify(token, SECRET_KEY, (error) => ((error) ? res.status(400).send({ message: 'Invalid Token' }) : next()))
       : res.status(401).send({ message: 'Missing token! Unauthorized User!' });
   }
-
-    setRole = (role) => {
-      console.log(req.body);
-      return (req, res, next) => {
-        req.role = role;
-
-        next();
-      };
-    }
 
     getEmailFromToken(token) {
       const decoded = jwt.verify(token, process.env.SECRET_KEY);

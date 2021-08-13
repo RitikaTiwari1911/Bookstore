@@ -1,7 +1,20 @@
 /* eslint-disable consistent-return */
+/**
+ * @module       controller
+ * @file         book.js
+ * @description  bookController holds the API
+ * @author       Ritika <spk2ritika1911@gmail.com>
+ * @since        13/08/2021
+-----------------------------------------------------------------------------------------------*/
+
 const bookService = require('../services/book');
 
 class BookController {
+  /**
+   * @description controller for adding books
+   * @param {*} req
+   * @param {*} res
+   */
     addBook = (req, res) => {
       const bookData = {
         author: req.body.author,
@@ -29,6 +42,12 @@ class BookController {
         });
     }
 
+    /**
+     * @description controller for getting all books
+     * @param {*} req
+     * @param {*} res
+     * @returns
+     */
     getAllBooks = (req, res) => {
       try {
         bookService.getBook((error, data) => ((error) ? res.status(400).send({
@@ -37,7 +56,7 @@ class BookController {
         })
           : res.send({
             success: true,
-            message: 'Employee information retrieved successfully!',
+            message: 'Books retrieved successfully!',
             data,
           })));
       } catch (error) {
@@ -48,35 +67,45 @@ class BookController {
       }
     }
 
+    /**
+     * @description controller for updating books
+     * @param {*} req
+     * @param {*} res
+     * @returns
+     */
     updateBook = (req, res) => {
       try {
-        const { bookId } = req.params;
-        const bookData = {
+        const bookDetails = {
           author: req.body.author,
           title: req.body.title,
+          image: req.body.image,
           quantity: req.body.quantity,
           price: req.body.price,
           description: req.body.description,
-          image: req.body.image,
+          bookId: req.params.bookId,
         };
-
-        bookService.updateBook(bookId, bookData, (error, data) => ((error) ? res.status(400).send({
+        const result = bookService.updateBook(bookDetails);
+        result.then(() => res.status(200).send({
+          success: true,
+          message: 'Your book updated successfully',
+        })).catch(() => res.status(400).send({
           success: false,
-          message: 'Some error occured while updating book',
-        })
-          : res.send({
-            success: true,
-            message: 'book updated successfully',
-            data,
-          })));
-      } catch (error) {
-        return res.send({
+          message: 'Failed to update book',
+        }));
+      } catch (err) {
+        res.status(500).send({
           success: false,
-          message: error.message,
+          message: 'Internal error from the server',
         });
       }
     }
 
+    /**
+     * @description controller for deleting books
+     * @param {*} req
+     * @param {*} res
+     * @returns
+     */
     deleteBook = (req, res) => {
       try {
         const { bookId } = req.params;
