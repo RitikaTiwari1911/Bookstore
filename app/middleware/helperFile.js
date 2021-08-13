@@ -45,5 +45,24 @@ class Helper {
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
       return decoded.emailId;
     }
+
+    setRole = (role) => {
+      return (req, res, next) => {
+        req.role = role;
+        next();
+      }
+    }
+  
+    checkRole = (role) => (req, res, next) => {
+      req.role = role;
+      if (role.includes(req.role)) {
+        next();
+      } else {
+        return res.status(401).send({
+          success: false,
+          message: 'In-Correct role'
+        });
+      }
+    };
 }
 module.exports = new Helper();

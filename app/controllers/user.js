@@ -11,7 +11,7 @@ const { userValidation, resetPasswordValidation } = require('../middleware/userV
 
 class UserController {
     // eslint-disable-next-line consistent-return
-    registerUser = (req, role, res) => {
+    registerUser = (req, res) => {
       try {
         const validation = userValidation.validate(req.body);
         if (validation.error) {
@@ -22,20 +22,23 @@ class UserController {
           lastName: req.body.lastName,
           emailId: req.body.emailId,
           password: req.body.password,
-          role,
+          role: req.role,
         };
 
-        userService.createUser(userDetails, (error, data) => ((error)
-          ? res.status(400).send({
-            success: false,
-            message: 'Email already exists',
-          })
-
-          : res.send({
+        userService.createUser(userDetails, (error, data) => {
+          if (error) {
+            return res.status(400).send({
+              success: false,
+              message: 'Registration failed',
+              error,
+            });
+          }
+          return res.status(200).send({
             success: true,
-            message: 'You are successfully registered!!',
+            message: 'Registered successfully',
             data,
-          })));
+          });
+        });
       } catch (error) {
         return res.status(500).send({
           success: false,
@@ -51,12 +54,12 @@ class UserController {
      * @returns
      */
 
-    userLogin = (req, role, res) => {
+    userLogin = (req, res) => {
       try {
         const loginInput = {
           emailId: req.body.emailId,
           password: req.body.password,
-          role,
+          role: req.role,
         };
         userService.login(loginInput, (error, data) => ((error) ? res.status(400).send({
           success: false,

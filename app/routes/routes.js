@@ -7,28 +7,20 @@
 -----------------------------------------------------------------------------------------------*/
 const userController = require('../controllers/user');
 const bookController = require('../controllers/books');
-// const helper = require('../middleware/helperFile');
+const helper = require('../middleware/helperFile');
 
 module.exports = (app) => {
   // Registering a new user
-  app.post('/register-user', (req, res) => {
-    userController.registerUser(req, 'user', res);
-  });
+  app.post('/register-user', helper.setRole('user'), userController.registerUser);
 
   // Registering a new admin
-  app.post('/register-admin', (req, res) => {
-    userController.registerUser(req, 'admin', res);
-  });
+  app.post('/register-admin', helper.setRole('admin'), userController.registerUser);
 
   // User login
-  app.post('/user-login', (req, res) => {
-    userController.userLogin(req, 'user', res);
-  });
+  app.post('/user-login', helper.checkRole('user'), userController.userLogin);
 
   // Admin login
-  app.post('/admin-login', (req, res) => {
-    userController.userLogin(req, 'admin', res);
-  });
+  app.post('/admin-login', helper.checkRole('admin'), userController.userLogin);
 
   // forgot password
   app.post('/forgot-password', userController.forgotPassword);

@@ -58,7 +58,7 @@ const Book = mongoose.model('book', bookSchema);
 class BookModel {
         /**
          * @description mongoose methods for create book
-         * @param {*} bookData 
+         * @param {*} bookData
          */
         createBook = async (bookData) => {
           const book = new Book(bookData);
@@ -67,7 +67,7 @@ class BookModel {
 
         /**
          * @description mongoose method for getting books
-         * @param {*} callback 
+         * @param {*} callback
          */
        get = (callback) => {
          Book.find({}, (error, data) => ((error) ? (callback(error, null)) : (callback(null, data))));
@@ -75,8 +75,8 @@ class BookModel {
 
        /**
         * @description mongoose method for updating books
-        * @param {*} data 
-        * @returns 
+        * @param {*} data
+        * @returns
         */
        updateBook = (data) => new Promise((resolve, reject) => {
          Book.findByIdAndUpdate(data.bookId, {
@@ -93,9 +93,9 @@ class BookModel {
 
        /**
         * @description mongoose method for deleting books
-        * @param {*} bookId 
-        * @param {*} callback 
-        * @returns 
+        * @param {*} bookId
+        * @param {*} callback
+        * @returns
         */
        deleteBook = (bookId, callback) => {
          try {
