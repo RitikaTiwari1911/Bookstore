@@ -13,7 +13,7 @@
 // connecting to the mongoDB through mongoose
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-// const nodemailer = require("../../utility/nodemailer")
+
 // schema for user of the bookstore
 const userSchema = mongoose.Schema({
   firstName: {
@@ -66,7 +66,6 @@ class UserModel {
      * @param {*} callback
      */
      // eslint-disable-line
-    // eslint-disable-next-line consistent-return
     create = (userDetails, callback) => {
       try {
         // eslint-disable-line 
@@ -125,9 +124,9 @@ class UserModel {
 
     /**
      * @description mongooose method for reseting the password
-     * @param {*} inputData 
-     * @param {*} callback 
-     * @returns 
+     * @param {*} inputData
+     * @param {*} callback
+     * @returns
      */
     updatePassword = async (inputData, callback) => {
       try {

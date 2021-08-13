@@ -6,6 +6,7 @@
  * @since        30/07/2021
 -----------------------------------------------------------------------------------------------*/
 const userController = require('../controllers/user');
+const bookController = require('../controllers/books');
 
 module.exports = (app) => {
   // Registering a new user
@@ -33,4 +34,10 @@ module.exports = (app) => {
 
   // reset password
   app.put('/reset-password', userController.resetPassword);
+
+  // create books
+  app.post('/books/createBook', bookController.addBook);
+
+  // get books
+  app.get('/books/getAllBooks', bookController.getAllBooks);
 };
