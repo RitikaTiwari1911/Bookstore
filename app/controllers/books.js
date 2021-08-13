@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const bookService = require('../services/book');
 
 class BookController {
@@ -28,23 +29,6 @@ class BookController {
         });
     }
 
-    // getAllBooks = (req, res) => {
-    //  bookService.getBook()
-    //    .then((data) => {
-    //      res.send({
-    //        message: 'All books fetched successfully',
-    //        data,
-    //      });
-    //    })
-    //    .catch((error) => {
-    //      res.send({
-    //        message: 'Some error occured while fetching the books',
-    //        error,
-    //
-    //      });
-    //    });
-    // }
-
     getAllBooks = (req, res) => {
       try {
         bookService.getBook((error, data) => ((error) ? res.status(400).send({
@@ -58,6 +42,55 @@ class BookController {
           })));
       } catch (error) {
         return res.send(500).send({
+          success: false,
+          message: error.message,
+        });
+      }
+    }
+
+    updateBook = (req, res) => {
+      try {
+        const { bookId } = req.params;
+        const bookData = {
+          author: req.body.author,
+          title: req.body.title,
+          quantity: req.body.quantity,
+          price: req.body.price,
+          description: req.body.description,
+          image: req.body.image,
+        };
+
+        bookService.updateBook(bookId, bookData, (error, data) => ((error) ? res.status(400).send({
+          success: false,
+          message: 'Some error occured while updating book',
+        })
+          : res.send({
+            success: true,
+            message: 'book updated successfully',
+            data,
+          })));
+      } catch (error) {
+        return res.send({
+          success: false,
+          message: error.message,
+        });
+      }
+    }
+
+    deleteBook = (req, res) => {
+      try {
+        const { bookId } = req.params;
+        bookService.deleteBook(bookId, (error, data) => ((error) ? res.status(400).send({
+          success: false,
+          message: 'Some error occured while deleting the data',
+        })
+          : res.send({
+            success: true,
+            messsage: 'deleted the user successfully!!',
+            data,
+          })));
+      } catch (error) {
+        return res.status(500).send({
           success: false,
           message: error.message,
         });

@@ -40,4 +40,10 @@ module.exports = (app) => {
 
   // get books
   app.get('/books/getAllBooks', bookController.getAllBooks);
+
+  // update books
+  app.put('/books/updateBook/:bookId', bookController.updateBook);
+
+  // delete book
+  app.delete('/books/deleteBook/:bookId', bookController.deleteBook);
 };

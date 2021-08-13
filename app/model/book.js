@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable max-len */
 /* eslint-disable no-use-before-define */
 const mongoose = require('mongoose');
 
@@ -53,6 +55,29 @@ class BookModel {
 
        get = (callback) => {
          Book.find({}, (error, data) => ((error) ? (callback(error, null)) : (callback(null, data))));
+       }
+
+       updateBook = (bookId, bookDetails, callback) => {
+         try {
+           Book.findByIdAndUpdate(bookId, {
+             author: bookDetails.author,
+             title: bookDetails.title,
+             quantity: bookDetails.quantity,
+             price: bookDetails.price,
+             description: bookDetails.description,
+             image: bookDetails.image,
+           }, (error, data) => ((error) ? (callback(error, null)) : callback(null, data)));
+         } catch (error) {
+           return callback(null);
+         }
+       }
+
+       deleteBook = (bookId, callback) => {
+         try {
+           Book.findByIdAndRemove(bookId, (error, data) => ((error) ? callback(error, null) : callback(null, data)));
+         } catch (error) {
+           return callback(error, null);
+         }
        }
 }
 
