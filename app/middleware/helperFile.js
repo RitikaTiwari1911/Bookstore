@@ -34,12 +34,12 @@ class Helper {
      * @param {*} next
      * @returns
      */
-  checkToken(req, res, next) {
-    const token = req.get('token');
-    return (token)
-      ? jwt.verify(token, SECRET_KEY, (error) => ((error) ? res.status(400).send({ message: 'Invalid Token' }) : next()))
-      : res.status(401).send({ message: 'Missing token! Unauthorized User!' });
-  }
+  //checkToken(req, res, next) {
+  //  const token = req.get('token');
+  //  return (token)
+  //    ? jwt.verify(token, SECRET_KEY, (error) => ((error) ? res.status(400).send({ message: 'Invalid Token' }) : next()))
+  //    : res.status(401).send({ message: 'Missing token! Unauthorized User!' });
+  //}
 
     getEmailFromToken(token) {
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
@@ -61,6 +61,24 @@ class Helper {
         return res.status(401).send({
           success: false,
           message: 'In-Correct role'
+        });
+      }
+    };
+
+    verifyRole = (req, res, next) => {
+      try {
+        const decode = jwt.verify(req.headers.token, process.env.JWT);
+        if (decode.role !== 'admin') {
+          res.status(501).send({
+            success: false,
+            message: 'Authorization Failed'
+          });
+        }
+        req.userData = decode;
+        next();
+      } catch (error) {
+        res.status(401).send({
+          error: 'Unauthorized Access, please check again',
         });
       }
     };
