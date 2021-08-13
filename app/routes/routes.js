@@ -29,14 +29,14 @@ module.exports = (app) => {
   app.put('/reset-password', userController.resetPassword);
 
   // create books
-  app.post('/books/createBook', bookController.addBook);
+  app.post('/books/createBook', helper.verifyRole1, bookController.addBook);
 
   // get books
   app.get('/books/getAllBooks', bookController.getAllBooks);
 
   // update books
-  app.put('/books/updateBook/:bookId', bookController.updateBook);
+  app.put('/books/updateBook/:bookId', helper.verifyRole1, bookController.updateBook);
 
   // delete book
-  app.delete('/books/deleteBook/:bookId', bookController.deleteBook);
+  app.delete('/books/deleteBook/:bookId', helper.verifyRole1, bookController.deleteBook);
 };

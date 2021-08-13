@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 /* eslint-disable max-len */
 /* eslint-disable no-use-before-define */
@@ -24,7 +25,6 @@ const bookSchema = new mongoose.Schema(
     quantity: {
       type: Number,
       required: true,
-      unique: true,
     },
     price: {
       type: Number,
@@ -60,9 +60,14 @@ class BookModel {
          * @description mongoose methods for create book
          * @param {*} bookData
          */
-        createBook = async (bookData) => {
+        createBook = (bookData) => {
           const book = new Book(bookData);
-          await book.save();
+          // await book.save();
+          return new Promise((resolve, reject) => {
+            book.save()
+              .then((book) => resolve(book))
+              .catch((err) => reject(err));
+          });
         }
 
         /**

@@ -76,7 +76,7 @@ class UserService {
             logger.error('Some error occured', error);
             callback(error, null);
           } else {
-            newToken = helper.generateToken(data);
+            newToken = helper.forgotPasswordToken(data);
           }
           // eslint-disable-next-line no-sequences
           link = `${process.env.PASSWORD_URL}${newToken}`,

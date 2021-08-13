@@ -10,12 +10,13 @@ class Helper {
      * @returns
      */
   generateToken(loginInput) {
+    console.log("input", loginInput)
     const token = jwt.sign(loginInput, process.env.SECRET_KEY, {
       expiresIn: '3000s',
     });
     return token;
   }
-
+  
   /**
      * @description comparing the password provided by the user and the password kept in
      * database using bcrypt as the password in database is hashed
@@ -65,13 +66,15 @@ class Helper {
       }
     };
 
-    verifyRole = (req, res, next) => {
+    verifyRole1 = (req, res, next) => {
+      console.log("from verify role")
       try {
-        const decode = jwt.verify(req.headers.token, process.env.JWT);
+        const decode = jwt.verify(req.headers.token, process.env.SECRET_KEY);
+        console.log("decode input", decode)
         if (decode.role !== 'admin') {
           res.status(501).send({
             success: false,
-            message: 'Authorization Failed'
+            message: 'Authorization Failed, Please use admin token'
           });
         }
         req.userData = decode;
@@ -82,5 +85,12 @@ class Helper {
         });
       }
     };
+
+    forgotPasswordToken(loginInput) {
+      const token = jwt.sign(loginInput.toJSON(), process.env.SECRET_KEY, {
+        expiresIn: '3000s',
+      });
+      return token;
+    }
 }
 module.exports = new Helper();

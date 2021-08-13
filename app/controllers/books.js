@@ -28,7 +28,6 @@ class BookController {
 
       bookService.addBook(bookData)
         .then((data) => {
-          console.log('data from controller', data);
           res.send({
             message: 'Book added successfully!!',
             data,

@@ -17,7 +17,6 @@ class BookService {
        */
       addBook = async (bookData) => {
         const data = await bookModel.createBook(bookData);
-        console.log('data from service', data);
         return data;
       }
 
