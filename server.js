@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 // Requiring routes
-require('./app/routes/routes.js')(app);
+require('./app/routes/routes')(app);
 
 // listen for request
 app.listen(process.env.PORT, () => {

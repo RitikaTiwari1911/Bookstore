@@ -1,0 +1,32 @@
+{
+    "adminLogin":{
+        "emailId": "prajaktaa@gmail.com",
+        "password": "Prajakta@1234"
+    },
+    "addBookWithCorrectDetails":{
+        "author": "Dan Brown",
+        "title": "Angels & Demons - Movie Tie-In",
+        "image": "http://books.google.com/books/content?id=GXznEnKwTdAC&printsec=frontcover&img=1&zoom=5",
+        "quantity": 15,
+        "price": 462,
+        "description": "The murder of a world-famous physicist raises fear"
+    },
+
+    "addBookWithNoTitle":{
+        "author": "Dan Brown",
+        "title": 123,
+        "image": "http://books.google.com/books/content?id=GXznEnKwTdAC&printsec=frontcover&img=1&zoom=5",
+        "quantity": 15,
+        "price": 462,
+        "description": "The murder of a world-famous physicist raises fear"
+    },
+    
+        "updateBookWithInCorrectDetails": {
+            "author": "JkRawling",
+            "title": "Harry Potter",
+            "quantity": 54,
+            "price": 700,
+            "description": "abcd"
+        }
+    
+}

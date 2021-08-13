@@ -29,7 +29,7 @@ class UserController {
           if (error) {
             return res.status(400).send({
               success: false,
-              message: 'Registration failed',
+              message: 'Email already exists',
               error,
             });
           }
@@ -65,10 +65,10 @@ class UserController {
           success: false,
           message: error,
         })
-          : res.send({
+          : res.status(200).send({
             success: true,
             message: 'Login successful!',
-            data,
+            token: data,
           })));
       } catch (error) {
         return res.status(500).send({

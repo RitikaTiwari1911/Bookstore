@@ -28,7 +28,7 @@ class BookController {
 
       bookService.addBook(bookData)
         .then((data) => {
-          res.send({
+          res.status(200).send({
             message: 'Book added successfully!!',
             data,
           });
@@ -53,7 +53,7 @@ class BookController {
           success: false,
           message: 'Some error occured',
         })
-          : res.send({
+          : res.status(200).send({
             success: true,
             message: 'Books retrieved successfully!',
             data,
@@ -112,7 +112,7 @@ class BookController {
           success: false,
           message: 'Some error occured while deleting the data',
         })
-          : res.send({
+          : res.status(200).send({
             success: true,
             messsage: 'deleted the user successfully!!',
             data,
